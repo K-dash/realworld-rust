@@ -1,0 +1,19 @@
+{
+    "name": "backend",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "backend",
+    "remoteUser": "rustuser",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "serayuzgur.crates",
+				"tamasfe.even-better-toml",
+                "vadimcn.vscode-lldb",
+                "amazonwebservices.codewhisperer-for-command-line-companion",
+                "Codeium.codeium"
+            ]
+        }
+    }
+}

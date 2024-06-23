@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    image: axum
+    container_name: axum
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: true
