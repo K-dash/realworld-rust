@@ -1,15 +1,22 @@
 use serde::{Deserialize, Serialize};
+use crate::models::article::Article;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct ArticleRequestData {
+pub struct RequestSchema {
     pub article: CreateArticleSchema,
 }
 
-// List
+// ---- List -----
 #[derive(Deserialize, Debug, Default)]
 pub struct FilterOptions {
-    pub page: Option<usize>,
+    pub offset: Option<usize>,
     pub limit: Option<usize>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ResponseSchema {
+    pub articles: Vec<Article>,
+    pub articles_count: usize,
 }
 
 // Read/Delete

@@ -4,7 +4,7 @@ mod schemas;
 
 use axum::{routing::get, routing::post, Router};
 use dotenv::dotenv;
-use routes::article::create_handler;
+use routes::article;
 use routes::healthcheck::health_check_handler;
 use std::sync::Arc;
 use tokio::net::TcpListener;
@@ -52,7 +52,9 @@ async fn main() {
     // register routes
     let app = Router::new()
         .route("/", get(health_check_handler))
-        .route("/articles", post(create_handler))
+        .route("/articles", post(article::create_handler))
+        .route("/articles/:slug", get(article::get_handler))
+        .route("/articles", get(article::get_list_handler))
         .with_state(Arc::new(AppState { db: pool.clone() }));
 
     // run server
