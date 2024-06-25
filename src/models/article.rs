@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
 #[allow(non_snake_case)]
 pub struct Article {
     pub slug: String,
