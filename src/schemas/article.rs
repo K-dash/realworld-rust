@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use crate::models::article::Article;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct ArticleRequestData {
+pub struct RequestSchema {
     pub article: CreateArticleSchema,
 }
 
@@ -14,7 +14,7 @@ pub struct FilterOptions {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct ArticlesResponseSchema {
+pub struct ResponseSchema {
     pub articles: Vec<Article>,
     pub articles_count: usize,
 }

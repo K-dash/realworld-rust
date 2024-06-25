@@ -10,13 +10,13 @@ use serde_json::json;
 
 use crate::{
     models::article::{Article},
-    schemas::article::{ArticleRequestData, ArticlesResponseSchema, FilterOptions, ParamOptions},
+    schemas::article::{RequestSchema, ResponseSchema, UpdateArticleSchema, FilterOptions, ParamOptions},
     AppState,
 };
 
 pub async fn create_handler(
     State(data): State<Arc<AppState>>,
-    Json(payload): Json<ArticleRequestData>,
+    Json(payload): Json<RequestSchema>,
 ) -> Result<impl IntoResponse, (StatusCode, Json<serde_json::Value>)> {
     let slug = payload.article.title.replace(' ', "-");
     let result = sqlx::query_as!(
@@ -99,7 +99,7 @@ pub async fn get_list_handler(
     match result {
         Ok(articles) => {
             let articles_count = articles.len();
-            let articles_response = ArticlesResponseSchema {
+            let articles_response = ResponseSchema {
                 articles,
                 articles_count,
             };
