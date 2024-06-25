@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+// TODO: DTO的に使われているので別途Schemaを作る
 #[derive(Debug, Deserialize, Serialize, sqlx::FromRow)]
 #[serde(rename_all = "camelCase")]
 #[allow(non_snake_case)]
