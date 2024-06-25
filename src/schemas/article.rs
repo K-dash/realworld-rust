@@ -2,8 +2,19 @@ use serde::{Deserialize, Serialize};
 use crate::models::article::Article;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct RequestSchema {
-    pub article: CreateArticleSchema,
+pub struct RequestArticleSchema<T> {
+    pub article: T,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ResponseArticleSchema {
+    pub article: Article,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ResponseArticlesSchema {
+    pub articles: Vec<Article>,
+    pub articles_count: usize,
 }
 
 // ---- List -----
@@ -13,19 +24,12 @@ pub struct FilterOptions {
     pub limit: Option<usize>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct ResponseSchema {
-    pub articles: Vec<Article>,
-    pub articles_count: usize,
-}
-
 // Read/Delete
 #[derive(Deserialize, Debug)]
 pub struct ParamOptions {
     pub slug: String,
 }
 
-// Create
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CreateArticleSchema {
     pub title: String,
@@ -35,11 +39,9 @@ pub struct CreateArticleSchema {
     // pub tags: Option<Vec<String>>,
 }
 
-// Update
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UpdateArticleSchema {
-    pub slug: String,
     pub title: Option<String>,
-    pub content: Option<String>,
-    pub is_published: Option<bool>,
+    pub description: Option<String>,
+    pub body: Option<String>,
 }
