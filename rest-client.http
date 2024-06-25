@@ -1,10 +1,21 @@
+# Post Article
 POST http://localhost:8080/articles HTTP/1.1
 Content-Type: application/json
 
 {
     "article": {
-        "title": "hoge World",
+        "title": "123 World",
         "description": "This is my first article",
         "body": "This is the content of the article."
     }
 }
+
+### Get Single Article
+GET http://localhost:8080/articles/123-world HTTP/1.1
+
+### Get List Article
+# Not Param
+GET http://localhost:8080/articles HTTP/1.1
+
+### Offset/Limit
+GET http://localhost:8080/articles?offset=2&limit=3 HTTP/1.1
