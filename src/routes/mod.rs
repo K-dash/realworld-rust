@@ -1,1 +1,2 @@
-pub mod home;
+pub mod healthcheck;
+pub mod article;
