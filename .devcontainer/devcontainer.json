@@ -12,6 +12,7 @@
 				"tamasfe.even-better-toml",
                 "vadimcn.vscode-lldb",
                 "amazonwebservices.codewhisperer-for-command-line-companion",
+                "humao.rest-client",
                 "Codeium.codeium"
             ]
         }

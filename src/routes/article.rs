@@ -184,3 +184,31 @@ pub async fn update_handler(
         }
     }
 }
+
+pub async fn delete_handler(
+    State(data): State<Arc<AppState>>,
+    Path(param): Path<ParamOptions>,
+) -> Result<impl IntoResponse, (StatusCode, Json<serde_json::Value>)> {
+    let result = sqlx::query(
+        r#"
+        DELETE FROM articles
+        WHERE slug = $1
+        "#,
+    )
+    .bind(&param.slug)
+    .execute(&data.db)
+    .await
+    .map_err(|e| {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "errors": { "body": [e.to_string()] } })),
+        )
+    })?;
+
+    if result.rows_affected() == 0 {
+        let error_response = json!({"errors": {"body": ["Article with that slug does not exist"]}});
+        return Err((StatusCode::NOT_FOUND, Json(error_response)));
+    }
+
+    Ok(StatusCode::NO_CONTENT)
+}
