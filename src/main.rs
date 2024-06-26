@@ -2,7 +2,7 @@ mod models;
 mod routes;
 mod schemas;
 
-use axum::{routing::get, routing::post, routing::put, Router};
+use axum::{routing::delete, routing::get, routing::post, routing::put, Router};
 use dotenv::dotenv;
 use routes::article;
 use routes::healthcheck::health_check_handler;
@@ -56,6 +56,7 @@ async fn main() {
         .route("/articles/:slug", get(article::get_handler))
         .route("/articles", get(article::get_list_handler))
         .route("/articles/:slug", put(article::update_handler))
+        .route("/articles/:slug", delete(article::delete_handler))
         .with_state(Arc::new(AppState { db: pool.clone() }));
 
     // run server

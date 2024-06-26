@@ -21,13 +21,16 @@ GET http://localhost:8080/articles HTTP/1.1
 GET http://localhost:8080/articles?offset=2&limit=3 HTTP/1.1
 
 ### Put Article
-PUT http://localhost:8080/articles/New-Title HTTP/1.1
+PUT http://localhost:8080/articles/1234567-World  HTTP/1.1
 Content-Type: application/json
 
 {
     "article": {
-        "title": "New Title",
+        "title": "1234567 World",
         "description": "Updated description",
         "body": "This is the updated content of the article."
     }
 }
+
+### Delete Article
+DELETE http://localhost:8080/articles/1234567-World HTTP/1.1
